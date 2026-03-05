@@ -22,7 +22,30 @@ jobs:
           tags: |
             douglasfilho/aula-primeira-pipeline:v${{ github.run_number }}
             douglasfilho/aula-primeira-pipeline:latest
+  CD:
+    runs-on: ubuntu-latest
+    needs: CI
+    steps:
+      - name: obtendo o código
+        uses: actions/checkout@v4.1.7
+      - name: contexto kubernetes
+        uses: azure/k8s-set-context@v4
+        with:
+          method: kubeconfig
+          kubeconfig: ${{ secrets.K8S_KUBECONFIG }}
+      - name: Execução de manifesto
+        uses: Azure/k8s-deploy@v4.9
+        with:
+          namespace: 'pipeline'
+          manifests: |
+            ./k8s/deployment.yaml
+          images: |
+            douglasfilho/aula-primeira-pipeline:v${{ github.run_number }}
+       
+        
+        
           
+
 
 
 

@@ -1,8 +1,7 @@
 name: CI-CD
 on:  
   push:
-    branches:
-      - main
+    branches: ["main"]
   workflow_dispatch: 
 jobs:
   CI:
@@ -14,5 +13,6 @@ jobs:
         uses: docker/login-action@v4.0.0
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
 

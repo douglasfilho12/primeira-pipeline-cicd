@@ -37,6 +37,7 @@ jobs:
         uses: Azure/k8s-deploy@v4.9
         with:
           namespace: 'pipeline'
+          skip-tls-verify: true
           manifests: |
             ./k8s/deployment.yaml
           images: |
@@ -45,6 +46,7 @@ jobs:
         
         
           
+
 
 
 
